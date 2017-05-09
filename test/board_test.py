@@ -8,7 +8,7 @@ class TestBoard(unittest.TestCase):
         board = Board()
         self.assertIsNotNone(board)
 
-    def get_square_test(self):
+    def coordinates_translation_test(self):
         board = Board()
         a1 = board.get_square('a1')
         self.assertEqual(0, a1.x)
