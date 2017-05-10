@@ -14,6 +14,9 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(0, a1.x)
         self.assertEqual(7, a1.y)
         self.assertTrue(a1.is_black())
+        b1 = board.get_square('b1')
+        self.assertEqual(1, b1.x)
+        self.assertEqual(7, b1.y)
         a2 = board.get_square('a2')
         self.assertEqual(0, a2.x)
         self.assertEqual(6, a2.y)
@@ -25,6 +28,5 @@ class TestBoard(unittest.TestCase):
 
     def initial_position_test(self):
         board = Board()
-        print(board.squares)
-        print(board.get_square('a1'))
         self.assertEqual('R', board.get_square('a1').piece.name)
+        self.assertEqual('N', board.get_square('b1').piece.name)

@@ -58,10 +58,10 @@ class PieceFactory:
     def build(symbol, color):
         if symbol == 'R':
             return Rook(color)
+        if symbol == 'N':
+            return Knight(color)
         if symbol == 'B':
             return Bishop(color)
-        if symbol == 'K':
-            return Knight(color)
         if symbol == 'Q':
             return Queen(color)
         if symbol == 'K':

@@ -6,7 +6,7 @@ class Board:
 
     def __init__(self):
         self.squares = [[Square(x, y) for x in range(0, 8)] for y in range(0, 8)]
-        self.pieces = 'RBNQKNBR'
+        self.pieces = 'RNBQKBNR'
         self.pawns = 'pppppppp'
         self.dispose_pieces()
 
