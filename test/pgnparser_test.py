@@ -79,6 +79,37 @@ class TestMove(unittest.TestCase):
         self.assertEqual(True, move2.is_take)
         self.assertEqual(True, move2.is_check)
 
+    def pawn_takes_with_checkmate_test(self):
+        parser = self.parser
+        move = parser.parse('exd4#')
+        self.assertEqual('p', move.piece)
+        self.assertEqual('d4',move.destination)
+        self.assertEqual(True, move.is_take)
+        self.assertEqual(True, move.is_checkmate)
+
+    def piece_checkmate_test(self):
+        parser = self.parser
+        move = parser.parse('Qh8#')
+        self.assertEqual('Q', move.piece)
+        self.assertEqual('h8', move.destination)
+        self.assertEqual(True, move.is_checkmate)
+
+
+    def piece_takes_with_checkmate_test(self):
+        parser = self.parser
+        move1 = parser.parse('Nxa3#')
+        self.assertEqual('N', move1.piece)
+        self.assertEqual('a3', move1.destination)
+        self.assertEqual(True, move1.is_take)
+        self.assertEqual(True, move1.is_checkmate)
+
+        move2 = parser.parse('Raxa3#')
+        self.assertEqual('R', move2.piece)
+        self.assertEqual('a', move2.source)
+        self.assertEqual('a3', move2.destination)
+        self.assertEqual(True, move2.is_take)
+        self.assertEqual(True, move2.is_checkmate)
+
     def kingside_castle_test(self):
         parser = self.parser
         move = parser.parse('O-O')

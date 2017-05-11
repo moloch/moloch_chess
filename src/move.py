@@ -6,4 +6,4 @@ class Move:
         self.is_take = False
         self.is_kingside_castle = False
         self.is_queenside_castle = False
-        self.is_check = False
+        self.is_checkmate = False

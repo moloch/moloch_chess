@@ -10,3 +10,8 @@ class TestGame(unittest.TestCase):
         self.assertEqual('W', game.white_player.color)
         self.assertEqual('B', game.black_player.color)
         self.assertEqual('W', game.current_player.color)
+
+    def game_move_test(self):
+        game = Game(Board())
+        game.add_pgn_move('e4')
+        self.assertEqual(['e4'], game.moves)

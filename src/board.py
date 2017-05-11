@@ -21,6 +21,27 @@ class Board:
             square.put(PieceFactory.build(pieces[i], color))
 
     def get_square(self, coordinates):
-        y = ord(coordinates[0]) - 97
-        x = int(8 - int(coordinates[1]))
-        return self.squares[x][y]
+        x = ord(coordinates[0]) - 97
+        y = int(8 - int(coordinates[1]))
+        return self.squares[y][x]
+
+    def find_src_pawn_position(self, dest_pawn_position, color):
+        square = self.get_square(dest_pawn_position)
+        increments = [1, 2]
+        if color == 'B':
+            increments = [-1, -2]
+        return self.__check_pawn_position(square, increments)
+
+    def __check_pawn_position(self, square, increments):
+        for increment in increments:
+            src_square = self.squares[square.y + increment][square.x]
+            if src_square.piece is not None and src_square.piece.name == 'p':
+                return src_square
+
+    def print_board(self):
+        for line in self.squares:
+            print('\n')
+            for square in line:
+                print(square)
+
+

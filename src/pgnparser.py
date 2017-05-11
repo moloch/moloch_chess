@@ -6,6 +6,9 @@ class PGNParser:
         self.move = Move()
 
     def parse(self, pgn_move):
+        if pgn_move[-1] == '#':
+            self.move.is_checkmate = True
+            pgn_move = pgn_move[:-1]
         if pgn_move[-1] == '+':
             self.move.is_check = True
             pgn_move = pgn_move[:-1]
