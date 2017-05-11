@@ -27,7 +27,6 @@ class PGNParser:
 
 
     def __parse_pawn_move(self, pgn_move):
-        print(pgn_move)
         self.move.piece = 'p'
         if len(pgn_move) == 2:
             self.move.destination = pgn_move
