@@ -1,6 +1,5 @@
 from src.move import Move
 
-
 class PGNParser:
     def __init__(self):
         self.move = Move()
@@ -28,23 +27,28 @@ class PGNParser:
     def __parse_queenside_castle(self):
         self.move.is_queenside_castle = True
 
-
     def __parse_pawn_move(self, pgn_move):
         self.move.piece = 'p'
         if len(pgn_move) == 2:
-            self.move.destination = pgn_move
+            self.move.destination = get_coords(pgn_move)
         elif len(pgn_move) == 4 and pgn_move[1] == 'x':
-            self.move.destination = pgn_move[2:]
+            self.move.destination = get_coords(pgn_move[2:])
             self.move.is_take = True
 
     def __parse_piece_move(self, pgn_move):
         self.move.piece = pgn_move[0]
         if len(pgn_move) == 3:
-            self.move.destination = pgn_move[1:]
+            self.move.destination = get_coords(pgn_move[1:])
         elif len(pgn_move) == 4 and pgn_move[1] == 'x':
-            self.move.destination = pgn_move[2:]
+            self.move.destination = get_coords(pgn_move[2:])
             self.move.is_take = True
         elif len(pgn_move) == 5 and pgn_move[2] == 'x':
             self.move.piece = pgn_move[:1]
             self.move.source = pgn_move[1:2]
-            self.move.destination = pgn_move[3:]
+            self.move.destination = get_coords(pgn_move[3:])
+
+
+def get_coords(pgn_coordinates):
+    x = ord(pgn_coordinates[0]) - 97
+    y = int(8 - int(pgn_coordinates[1]))
+    return x, y

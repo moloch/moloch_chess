@@ -21,9 +21,7 @@ class Board:
             square.put(PieceFactory.build(pieces[i], color))
 
     def get_square(self, coordinates):
-        x = ord(coordinates[0]) - 97
-        y = int(8 - int(coordinates[1]))
-        return self.squares[y][x]
+        return self.squares[coordinates[1]][coordinates[0]]
 
     def find_src_pawn_position(self, dest_pawn_position, color):
         square = self.get_square(dest_pawn_position)
@@ -43,5 +41,3 @@ class Board:
             print('\n')
             for square in line:
                 print(square)
-
-
