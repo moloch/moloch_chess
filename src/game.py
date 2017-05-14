@@ -15,5 +15,8 @@ class Game:
 
     def add_pgn_move(self, pgn_move):
         move = self.parser.parse(pgn_move)
+        self.add_move(move)
+
+    def add_move(self, move):
         if self.legalityChecker.check(move, self.current_player.color):
-            self.moves.append(pgn_move)
+            self.moves.append(move)

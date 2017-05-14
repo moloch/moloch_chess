@@ -54,6 +54,7 @@ class Pawn:
         if src_square is not None:
             if dest_square.piece is None:
                 move.source = src_square
+                move.destination = dest_square
                 return True
         return False
 

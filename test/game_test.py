@@ -1,6 +1,7 @@
 import unittest
 from src.game import Game
 from src.board import Board
+from src.pgnparser import get_coords
 
 
 class TestGame(unittest.TestCase):
@@ -14,4 +15,7 @@ class TestGame(unittest.TestCase):
     def game_move_test(self):
         game = Game(Board())
         game.add_pgn_move('e4')
-        self.assertEqual(['e4'], game.moves)
+        self.assertEqual((get_coords('e2'))[0], game.moves[0].source.x)
+        self.assertEqual((get_coords('e2'))[1], game.moves[0].source.y)
+        self.assertEqual((get_coords('e4'))[0], game.moves[0].destination.x)
+        self.assertEqual((get_coords('e4'))[1], game.moves[0].destination.y)

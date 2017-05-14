@@ -4,4 +4,4 @@ class Player:
         self.game = game
 
     def move(self, move):
-        return move.parse(self.game)
+        return self.game.add_move(move)
