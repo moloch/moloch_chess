@@ -1,8 +1,9 @@
 class Move:
-    def __init__(self, piece=None, source=None, destination=None,
+    def __init__(self, piece=None, color='W', source=None, destination=None,
                  is_take=False, is_kingside_castle=False,
                  is_queenside_castle=False, is_checkmate=False):
         self.piece = piece
+        self.color = color
         self.source = source
         self.destination = destination
         self.is_take = is_take

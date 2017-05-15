@@ -65,16 +65,33 @@ class Pawn:
 class PieceFactory:
 
     @staticmethod
-    def build(symbol, color):
-        if symbol == 'R':
-            return Rook(color)
-        if symbol == 'N':
-            return Knight(color)
-        if symbol == 'B':
-            return Bishop(color)
-        if symbol == 'Q':
-            return Queen(color)
-        if symbol == 'K':
-            return King(color)
-        if symbol == 'p':
+    def build(value):
+        color = 'W' if value > 0 else 'B'
+        value = value if value > 0 else -1 * value
+        if value == 1:
             return Pawn(color)
+        elif value == 2:
+            return Rook(color)
+        elif value == 3:
+            return Knight(color)
+        elif value == 4:
+            return Bishop(color)
+        elif value == 5:
+            return Queen(color)
+        elif value == 6:
+            return King(color)
+
+    @staticmethod
+    def build_from_pgn(value, color):
+        if value == 'p':
+            return Pawn(color)
+        elif value == 'R':
+            return Rook(color)
+        elif value == 'N':
+            return Knight(color)
+        elif value == 'B':
+            return Bishop(color)
+        elif value == 'Q':
+            return Queen(color)
+        elif value == 'K':
+            return King(color)

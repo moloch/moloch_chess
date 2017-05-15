@@ -6,19 +6,19 @@ class Board:
 
     def __init__(self):
         self.squares = [[Square(x, y) for x in range(0, 8)] for y in range(0, 8)]
-        self.pieces = 'RNBQKBNR'
-        self.pawns = 'pppppppp'
+        self.pieces = [2, 3, 4, 5, 6, 4, 3, 2]
+        self.pawns = 8 * [1]
         self.dispose_pieces()
 
     def dispose_pieces(self):
-        self.__dispose_pieces(self.pieces, 7, 'W')
-        self.__dispose_pieces(self.pawns, 6, 'W')
-        self.__dispose_pieces(self.pawns, 1, 'B')
-        self.__dispose_pieces(self.pieces, 0, 'B')
+        self.__dispose_pieces(self.pieces, 7)
+        self.__dispose_pieces(self.pawns, 6)
+        self.__dispose_pieces([-x for x in self.pawns], 1)
+        self.__dispose_pieces([-x for x in self.pieces], 0)
 
-    def __dispose_pieces(self, pieces, row, color):
+    def __dispose_pieces(self, pieces, row):
         for i, square in enumerate(self.squares[row]):
-            square.put(PieceFactory.build(pieces[i], color))
+            square.put(PieceFactory.build(pieces[i]))
 
     def get_square(self, coordinates):
         return self.squares[coordinates[1]][coordinates[0]]

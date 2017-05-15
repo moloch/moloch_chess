@@ -18,5 +18,5 @@ class Game:
         self.add_move(move)
 
     def add_move(self, move):
-        if self.legalityChecker.check(move, self.current_player.color):
+        if self.legalityChecker.check(move):
             self.moves.append(move)

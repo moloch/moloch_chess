@@ -12,11 +12,11 @@ class TestGame(unittest.TestCase):
         move = Move()
         move.piece = 'p'
         move.destination = get_coords('e4')
-        self.assertEqual(True, checker.check(move, 'W'))
+        self.assertEqual(True, checker.check(move))
 
     def pawn_illegal_move_check_test(self):
         checker = LegalityChecker(Game(Board()))
         move = Move()
         move.piece = 'p'
         move.destination = get_coords('e5')
-        self.assertEqual(False, checker.check(move, 'W'))
+        self.assertEqual(False, checker.check(move))
