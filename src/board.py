@@ -4,11 +4,17 @@ from src.pieces import PieceFactory
 
 class Board:
 
-    def __init__(self):
+    def __init__(self, init_matrix = None):
         self.squares = [[Square(x, y) for x in range(0, 8)] for y in range(0, 8)]
-        self.pieces = [2, 3, 4, 5, 6, 4, 3, 2]
-        self.pawns = 8 * [1]
-        self.dispose_pieces()
+        if(init_matrix == None):
+            self.pieces = [2, 3, 4, 5, 6, 4, 3, 2]
+            self.pawns = 8 * [1]
+            self.dispose_pieces()
+        else:
+            for i, row in enumerate(init_matrix):
+                for j, piece_value in enumerate(row):
+                    if piece_value != 0:
+                        self.squares[i][j].put(PieceFactory.build(piece_value))
 
     def dispose_pieces(self):
         self.__dispose_pieces(self.pieces, 7)
