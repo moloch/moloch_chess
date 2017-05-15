@@ -1,5 +1,5 @@
 import unittest
-from src.pgnparser import PGNParser, get_coords
+from src.pgnparser import PGNParser, get_coords, get_x_coord
 from src.board import Board
 
 
@@ -19,6 +19,7 @@ class TestMove(unittest.TestCase):
         parser.parse('exd4')
         self.assertEqual('p', parser.move.piece)
         self.assertEqual(get_coords('d4'), parser.move.destination)
+        self.assertEqual(get_x_coord('e3'), parser.move.source)
         self.assertEqual(True, parser.move.is_take)
 
     def piece_move_test(self):

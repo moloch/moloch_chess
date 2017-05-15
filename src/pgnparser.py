@@ -33,6 +33,7 @@ class PGNParser:
         if len(pgn_move) == 2:
             self.move.destination = get_coords(pgn_move)
         elif len(pgn_move) == 4 and pgn_move[1] == 'x':
+            self.move.source = get_x_coord(pgn_move[0])
             self.move.destination = get_coords(pgn_move[2:])
             self.move.is_take = True
 
@@ -50,6 +51,10 @@ class PGNParser:
 
 
 def get_coords(pgn_coordinates):
-    x = ord(pgn_coordinates[0]) - 97
-    y = int(8 - int(pgn_coordinates[1]))
-    return x, y
+    return get_x_coord(pgn_coordinates), get_y_coord(pgn_coordinates)
+
+def get_x_coord(pgn_coordinates):
+    return ord(pgn_coordinates[0]) - 97
+
+def get_y_coord(pgn_coordinates):
+    return int(8 - int(pgn_coordinates[1]))

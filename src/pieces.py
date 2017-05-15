@@ -50,9 +50,12 @@ class Pawn:
 
     def check_move(self, move, game):
         dest_square = game.board.get_square(move.destination)
-        src_square = game.board.find_src_pawn_position(move.destination, game.current_player.color)
+        if move.is_take:
+            src_square = game.board.find_taking_pawn_position(move.destination, move.source, game.current_player.color)
+        else:
+            src_square = game.board.find_src_pawn_position(move.destination, game.current_player.color)
         if src_square is not None:
-            if dest_square.piece is None:
+            if dest_square.piece is None or dest_square.piece is not None and move.is_take:
                 move.source = src_square
                 move.destination = dest_square
                 return True

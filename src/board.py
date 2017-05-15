@@ -36,6 +36,13 @@ class Board:
             increments = [-1, -2]
         return self.__check_pawn_position(square, increments)
 
+    def find_taking_pawn_position(self, dest_pawn_position, source_pawn_column, color):
+        direction = 1 if color=='W' else -1
+        dest_square = self.get_square(dest_pawn_position)
+        src_square = self.get_square((source_pawn_column, dest_square.y + direction))
+        if src_square.piece is not None and src_square.piece.name == 'p':
+            return src_square
+
     def __check_pawn_position(self, square, increments):
         for increment in increments:
             src_square = self.squares[square.y + increment][square.x]
