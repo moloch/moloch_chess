@@ -4,7 +4,8 @@ class PGNParser:
     def __init__(self):
         self.move = Move()
 
-    def parse(self, pgn_move):
+    def parse(self, pgn_move, color='W'):
+        self.move.color = color
         if pgn_move[-1] == '#':
             self.move.is_checkmate = True
             pgn_move = pgn_move[:-1]

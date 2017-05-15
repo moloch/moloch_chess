@@ -14,7 +14,7 @@ class Game:
         self.moves = []
 
     def add_pgn_move(self, pgn_move):
-        move = self.parser.parse(pgn_move)
+        move = self.parser.parse(pgn_move, self.current_player.color)
         self.add_move(move)
 
     def add_move(self, move):
