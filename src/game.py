@@ -21,3 +21,10 @@ class Game:
         if self.legalityChecker.check(move):
             self.moves.append(move)
             self.board.update(move)
+            self.__switch_current_player()
+
+    def __switch_current_player(self):
+        if self.current_player == self.white_player:
+            self.current_player = self.black_player
+        else:
+            self.current_player = self.white_player

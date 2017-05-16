@@ -9,7 +9,8 @@ from src.pgnparser import get_coords
 class TestPlayer(unittest.TestCase):
     def move_test(self):
         game = Game(Board())
+        self.assertEqual('W', game.current_player.color)
         self.assertEqual(0, len(game.moves))
-        player = Player('W', game)
-        player.move(Move(piece='p', destination=get_coords('e4')))
+        game.current_player.move(Move(piece='p', destination=get_coords('e4')))
         self.assertEqual(1, len(game.moves))
+        self.assertEqual('B', game.current_player.color)

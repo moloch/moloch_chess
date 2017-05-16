@@ -55,6 +55,10 @@ class Board:
 
     def print_board(self):
         for line in self.squares:
-            print('\n')
+            line_str = ""
             for square in line:
-                print(square)
+                if square.piece == None:
+                    line_str += '0'
+                else:
+                    line_str += square.piece.name
+            print(line_str)

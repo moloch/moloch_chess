@@ -5,3 +5,6 @@ class Player:
 
     def move(self, move):
         return self.game.add_move(move)
+
+    def pgn_move(self, move):
+        return self.game.add_pgn_move(move)
