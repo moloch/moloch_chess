@@ -20,3 +20,4 @@ class Game:
     def add_move(self, move):
         if self.legalityChecker.check(move):
             self.moves.append(move)
+            self.board.update(move)

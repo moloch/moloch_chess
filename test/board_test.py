@@ -42,13 +42,6 @@ class TestBoard(unittest.TestCase):
         self.assertEqual('K', board.get_square(get_coords('e8')).piece.name)
         self.assertEqual('B', board.get_square(get_coords('e8')).piece.color)
 
-    def find_pawn_src_square_test(self):
-        board = Board()
-        self.assertEqual(4, board.find_src_pawn_position(get_coords('e4'), 'W').x)
-        self.assertEqual(6, board.find_src_pawn_position(get_coords('e4'), 'W').y)
-        self.assertEqual(4, board.find_src_pawn_position(get_coords('e5'), 'B').x)
-        self.assertEqual(1, board.find_src_pawn_position(get_coords('e5'), 'B').y)
-
     def custom_position_test(self):
         # white king in d6 black king in f3
         board = Board(init_matrix=[[0, 0, 0, 0, 0, 0, 0, 0],
@@ -63,4 +56,11 @@ class TestBoard(unittest.TestCase):
         self.assertEqual('W', board.get_square(get_coords('d6')).piece.color)
         self.assertEqual('K', board.get_square(get_coords('f3')).piece.name)
         self.assertEqual('B', board.get_square(get_coords('f3')).piece.color)
+
+    def find_pawn_src_square_test(self):
+        board = Board()
+        self.assertEqual(4, board.find_src_pawn_position(get_coords('e4'), 'W').x)
+        self.assertEqual(6, board.find_src_pawn_position(get_coords('e4'), 'W').y)
+        self.assertEqual(4, board.find_src_pawn_position(get_coords('e5'), 'B').x)
+        self.assertEqual(1, board.find_src_pawn_position(get_coords('e5'), 'B').y)
 

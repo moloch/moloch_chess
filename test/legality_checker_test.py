@@ -10,7 +10,7 @@ class TestGame(unittest.TestCase):
     def pawn_legal_move_check_test(self):
         checker = LegalityChecker(Game(Board()))
         move = Move(piece='p', destination=get_coords('e4'))
-        self.assertEqual(True, checker.check(move))
+        self.assertNotEqual(False, checker.check(move))
 
     def pawn_legal_take_check_test(self):
         # e3 takes d4  -> exd4
@@ -24,7 +24,7 @@ class TestGame(unittest.TestCase):
                                    [0, 0, 0, 0, 0, 0, 0, 0]])
         checker = LegalityChecker(Game(board=board))
         move = Move(piece='p', destination=get_coords('d4'), source=get_x_coord('e3'), is_take=True)
-        self.assertEqual(True, checker.check(move))
+        self.assertNotEqual(False, checker.check(move))
 
     def pawn_illegal_move_check_test(self):
         checker = LegalityChecker(Game(Board()))

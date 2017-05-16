@@ -20,3 +20,6 @@ class Square:
     def put(self, piece):
         self.piece = piece
 
+    def clear(self):
+        self.piece = None
+

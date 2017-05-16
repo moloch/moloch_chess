@@ -29,6 +29,10 @@ class Board:
     def get_square(self, coordinates):
         return self.squares[coordinates[1]][coordinates[0]]
 
+    def update(self, move):
+        move.source.clear()
+        move.destination.piece = PieceFactory.build_from_pgn(move.piece, move.color)
+
     def find_src_pawn_position(self, dest_pawn_position, color):
         square = self.get_square(dest_pawn_position)
         increments = [1, 2]

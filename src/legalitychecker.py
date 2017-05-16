@@ -7,4 +7,4 @@ class LegalityChecker:
 
     def check(self, move):
         piece = PieceFactory.build_from_pgn(move.piece, move.color)
-        return piece.check_move(move, self.game)
+        return piece.perform_move(move, self.game)
