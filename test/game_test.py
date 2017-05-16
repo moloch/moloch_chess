@@ -12,7 +12,7 @@ class TestGame(unittest.TestCase):
         self.assertEqual('B', game.black_player.color)
         self.assertEqual('W', game.current_player.color)
 
-    def game_move_test(self):
+    def game_pawn_move_test(self):
         board = Board()
         game = Game(board)
         self.assertEqual('p', board.get_square(get_coords('e2')).piece.name)

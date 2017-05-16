@@ -1,4 +1,4 @@
-from src.pieces import PieceFactory
+from pieces import PieceFactory
 
 
 class LegalityChecker:

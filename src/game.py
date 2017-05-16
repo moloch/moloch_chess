@@ -1,6 +1,6 @@
-from src.player import Player
-from src.pgnparser import PGNParser
-from src.legalitychecker import LegalityChecker
+from player import Player
+from pgnparser import PGNParser
+from legalitychecker import LegalityChecker
 
 
 class Game:

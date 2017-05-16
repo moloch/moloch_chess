@@ -1,5 +1,5 @@
-from src.square import Square
-from src.pieces import PieceFactory
+from square import Square
+from pieces import PieceFactory
 
 
 class Board:
@@ -52,6 +52,23 @@ class Board:
             src_square = self.squares[square.y + increment][square.x]
             if src_square.piece is not None and src_square.piece.name == 'p':
                 return src_square
+
+    def find_src_rook_position(self, dest_rook_position, color):
+        dest_square = self.get_square(dest_rook_position)
+        for x in range(8):
+            src_square = self.get_square((x, dest_square.y))
+            if src_square.piece is not None and src_square.piece.name == 'R':
+                return src_square
+        for y in range(8):
+            src_square = self.get_square((dest_square.x, y))
+            if src_square.piece is not None and src_square.piece.name == 'R':
+                return src_square
+        return False
+
+
+    def find_taking_rook_position(self, dest_pawn_position, source_pawn_column, color):
+        pass
+
 
     def print_board(self):
         for line in self.squares:

@@ -1,4 +1,4 @@
-from src.move import Move
+from move import Move
 
 class PGNParser:
     def __init__(self):

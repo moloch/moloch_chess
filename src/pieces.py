@@ -3,6 +3,19 @@ class Rook:
         self.color = color
         self.name = 'R'
 
+    def perform_move(self, move, game):
+        dest_square = game.board.get_square(move.destination)
+        if move.is_take:
+            src_square = game.board.find_taking_rook_position(move.destination, move.source, game.current_player.color)
+        else:
+            src_square = game.board.find_src_rook_position(move.destination, game.current_player.color)
+        if src_square is not None:
+            if dest_square.piece is None or dest_square.piece is not None and move.is_take:
+                move.source = src_square
+                move.destination = dest_square
+                return move
+        return False
+
     def __str__(self):
         return self.name
 
