@@ -45,3 +45,39 @@ class TestGame(unittest.TestCase):
         self.assertEqual((get_coords('d1'))[1], game.moves[0].destination.y)
         self.assertEqual(None, board.get_square(get_coords('d6')).piece)
         self.assertEqual('R', board.get_square(get_coords('d1')).piece.name)
+
+    def rook_should_not_jump_over_pieces_while_moving_south_test(self):
+        #White rook in d6, black rook in f3
+        board = Board(init_matrix=[[6, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 2, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 1, 0, -2, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, -6, 0]])
+        game = Game(board)
+        self.assertEqual('R', board.get_square(get_coords('d6')).piece.name)
+        self.assertEqual(None, board.get_square(get_coords('d1')).piece)
+        game.add_pgn_move('Rd1')
+        self.assertEqual(0, len(game.moves))
+        self.assertEqual('R', board.get_square(get_coords('d6')).piece.name)
+        self.assertEqual(None, board.get_square(get_coords('d1')).piece)
+
+    def rook_should_not_jump_over_pieces_while_moving_east_test(self):
+        #White rook in d6, black rook in f3
+        board = Board(init_matrix=[[6, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 2, 0, 1, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 1, 0, -2, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, -6, 0]])
+        game = Game(board)
+        self.assertEqual('R', board.get_square(get_coords('d6')).piece.name)
+        self.assertEqual(None, board.get_square(get_coords('h6')).piece)
+        game.add_pgn_move('Rh6')
+        self.assertEqual(0, len(game.moves))
+        self.assertEqual('R', board.get_square(get_coords('d6')).piece.name)
+        self.assertEqual(None, board.get_square(get_coords('h6')).piece)

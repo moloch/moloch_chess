@@ -33,6 +33,30 @@ class Board:
         move.source.clear()
         move.destination.piece = PieceFactory.build_from_pgn(move.piece, move.color)
 
+    def find_first_piece(self, source, direction, piece_type):
+        if direction == 'N':
+            for y in range(source[1] - 1, 0, -1):
+                current_square = self.get_square((source[0], y))
+                if current_square.piece is not None:
+                    return current_square
+        if direction == 'S':
+            for y in range(source[1] + 1, 8):
+                current_square = self.get_square((source[0], y))
+                if current_square.piece is not None:
+                    return current_square
+        if direction == 'W':
+            for x in range(source[0] - 1, 0, -1):
+                current_square = self.get_square((x, source[1]))
+                if current_square.piece is not None:
+                    return current_square
+        if direction == 'E':
+            for x in range(source[0] + 1, 8):
+                current_square = self.get_square((x, source[1]))
+                if current_square.piece is not None:
+                    return current_square
+        return None
+
+
     def find_src_pawn_position(self, dest_pawn_position, color):
         square = self.get_square(dest_pawn_position)
         increments = [1, 2]
@@ -55,16 +79,11 @@ class Board:
 
     def find_src_rook_position(self, dest_rook_position, color):
         dest_square = self.get_square(dest_rook_position)
-        for x in range(8):
-            src_square = self.get_square((x, dest_square.y))
-            if src_square.piece is not None and src_square.piece.name == 'R':
+        src_square = False
+        for direction in ['N', 'S', 'W', 'E']:
+            src_square = self.find_first_piece((dest_square.x, dest_square.y), direction, 'R')
+            if src_square != None and src_square.piece.name == 'R':
                 return src_square
-        for y in range(8):
-            src_square = self.get_square((dest_square.x, y))
-            if src_square.piece is not None and src_square.piece.name == 'R':
-                return src_square
-        return False
-
 
     def find_taking_rook_position(self, dest_pawn_position, source_pawn_column, color):
         pass
