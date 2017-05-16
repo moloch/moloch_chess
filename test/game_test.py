@@ -24,3 +24,24 @@ class TestGame(unittest.TestCase):
         self.assertEqual((get_coords('e4'))[1], game.moves[0].destination.y)
         self.assertEqual(None, board.get_square(get_coords('e2')).piece)
         self.assertEqual('p', board.get_square(get_coords('e4')).piece.name)
+
+    def rook_move_test(self):
+        #White rook in d6, black rook in f3
+        board = Board(init_matrix=[[6, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 2, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, -2, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, -6, 0]])
+        game = Game(board)
+        self.assertEqual('R', board.get_square(get_coords('d6')).piece.name)
+        self.assertEqual(None, board.get_square(get_coords('d1')).piece)
+        game.add_pgn_move('Rd1')
+        self.assertEqual((get_coords('d6'))[0], game.moves[0].source.x)
+        self.assertEqual((get_coords('d6'))[1], game.moves[0].source.y)
+        self.assertEqual((get_coords('d1'))[0], game.moves[0].destination.x)
+        self.assertEqual((get_coords('d1'))[1], game.moves[0].destination.y)
+        self.assertEqual(None, board.get_square(get_coords('d6')).piece)
+        self.assertEqual('R', board.get_square(get_coords('d1')).piece.name)
