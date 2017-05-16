@@ -1,8 +1,4 @@
-from abc import abstractmethod
-
-
 class Piece:
-    @abstractmethod
     def perform_move(self, move, game):
         dest_square = game.board.get_square(move.destination)
         if move.is_take:
@@ -15,6 +11,7 @@ class Piece:
                 move.destination = dest_square
                 return move
         return False
+
 
 class Rook(Piece):
     def __init__(self, color):
@@ -36,7 +33,7 @@ class Rook(Piece):
         return self.name
 
 
-class Knight:
+class Knight(Piece):
     def __init__(self, color):
         self.color = color
         self.name = 'N'
@@ -45,7 +42,7 @@ class Knight:
         return self.name
 
 
-class Bishop:
+class Bishop(Piece):
     def __init__(self, color):
         self.color = color
         self.name = 'B'
@@ -54,7 +51,7 @@ class Bishop:
         return self.name
 
 
-class Queen:
+class Queen(Piece):
     def __init__(self, color):
         self.color = color
         self.name = 'Q'
@@ -63,7 +60,7 @@ class Queen:
         return self.name
 
 
-class King:
+class King(Piece):
     def __init__(self, color):
         self.color = color
         self.name = 'K'
