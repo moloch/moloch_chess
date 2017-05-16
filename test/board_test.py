@@ -67,8 +67,8 @@ class TestBoard(unittest.TestCase):
                                    [0, 0, 0, 0, 0, 0, 0, 0],
                                    [0, 0, 0, 0, 1, 0, 0, 0],
                                    [0, 0, 0, 0, 0, 0, 0, 0]])
-        self.assertEqual(get_coords('e6')[0], board.find_first_piece(get_coords('e2'), 'N', 'p').x)
-        self.assertEqual(get_coords('e6')[1], board.find_first_piece(get_coords('e2'), 'N', 'p').y)
+        self.assertEqual(get_coords('e6')[0], board.find_first_piece(get_coords('e2'), 'N').x)
+        self.assertEqual(get_coords('e6')[1], board.find_first_piece(get_coords('e2'), 'N').y)
 
     def find_first_piece_south_test(self):
         # white pawns in e2 and e6
@@ -80,8 +80,8 @@ class TestBoard(unittest.TestCase):
                                    [0, 0, 0, 0, 0, 0, 0, 0],
                                    [0, 0, 0, 0, 1, 0, 0, 0],
                                    [0, 0, 0, 0, 0, 0, 0, 0]])
-        self.assertEqual(get_coords('e2')[0], board.find_first_piece(get_coords('e6'), 'S', 'p').x)
-        self.assertEqual(get_coords('e2')[1], board.find_first_piece(get_coords('e6'), 'S', 'p').y)
+        self.assertEqual(get_coords('e2')[0], board.find_first_piece(get_coords('e6'), 'S').x)
+        self.assertEqual(get_coords('e2')[1], board.find_first_piece(get_coords('e6'), 'S').y)
 
     def find_first_piece_west_test(self):
         # white pawns in b6 and f6
@@ -93,8 +93,8 @@ class TestBoard(unittest.TestCase):
                                    [0, 0, 0, 0, 0, 0, 0, 0],
                                    [0, 0, 0, 0, 0, 0, 0, 0],
                                    [0, 0, 0, 0, 0, 0, 0, 0]])
-        self.assertEqual(get_coords('b6')[0], board.find_first_piece(get_coords('f6'), 'W', 'p').x)
-        self.assertEqual(get_coords('b6')[1], board.find_first_piece(get_coords('f6'), 'W', 'p').y)
+        self.assertEqual(get_coords('b6')[0], board.find_first_piece(get_coords('f6'), 'W').x)
+        self.assertEqual(get_coords('b6')[1], board.find_first_piece(get_coords('f6'), 'W').y)
 
     def find_first_piece_east_test(self):
         # white pawns in b6 and f6
@@ -106,13 +106,5 @@ class TestBoard(unittest.TestCase):
                                    [0, 0, 0, 0, 0, 0, 0, 0],
                                    [0, 0, 0, 0, 0, 0, 0, 0],
                                    [0, 0, 0, 0, 0, 0, 0, 0]])
-        self.assertEqual(get_coords('f6')[0], board.find_first_piece(get_coords('b6'), 'E', 'p').x)
-        self.assertEqual(get_coords('f6')[1], board.find_first_piece(get_coords('b6'), 'E', 'p').y)
-
-    def find_pawn_src_square_test(self):
-        board = Board()
-        self.assertEqual(4, board.find_src_pawn_position(get_coords('e4'), 'W').x)
-        self.assertEqual(6, board.find_src_pawn_position(get_coords('e4'), 'W').y)
-        self.assertEqual(4, board.find_src_pawn_position(get_coords('e5'), 'B').x)
-        self.assertEqual(1, board.find_src_pawn_position(get_coords('e5'), 'B').y)
-
+        self.assertEqual(get_coords('f6')[0], board.find_first_piece(get_coords('b6'), 'E').x)
+        self.assertEqual(get_coords('f6')[1], board.find_first_piece(get_coords('b6'), 'E').y)

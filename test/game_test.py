@@ -46,6 +46,28 @@ class TestGame(unittest.TestCase):
         self.assertEqual(None, board.get_square(get_coords('d6')).piece)
         self.assertEqual('R', board.get_square(get_coords('d1')).piece.name)
 
+    def black_rook_move_test(self):
+        #White rook in d6, black rook in f3
+        board = Board(init_matrix=[[6, 0, 0, 0, 0, 0, 0, -2],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 2, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, -2, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, -6, 0]])
+        game = Game(board)
+        game.current_player = game.black_player
+        self.assertEqual('R', board.get_square(get_coords('h8')).piece.name)
+        self.assertEqual(None, board.get_square(get_coords('h1')).piece)
+        game.add_pgn_move('Rh1')
+        self.assertEqual((get_coords('h8'))[0], game.moves[0].source.x)
+        self.assertEqual((get_coords('h8'))[1], game.moves[0].source.y)
+        self.assertEqual((get_coords('h1'))[0], game.moves[0].destination.x)
+        self.assertEqual((get_coords('h1'))[1], game.moves[0].destination.y)
+        self.assertEqual(None, board.get_square(get_coords('h8')).piece)
+        self.assertEqual('R', board.get_square(get_coords('h1')).piece.name)
+
     def rook_should_not_jump_over_pieces_while_moving_south_test(self):
         #White rook in d6, black rook in f3
         board = Board(init_matrix=[[6, 0, 0, 0, 0, 0, 0, 0],
