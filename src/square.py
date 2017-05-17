@@ -23,3 +23,6 @@ class Square:
     def clear(self):
         self.piece = None
 
+    def get_coords(self):
+        return self.x, self.y
+
