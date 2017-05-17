@@ -39,19 +39,31 @@ class Board:
                 current_square = self.get_square((source[0], y))
                 if current_square.piece is not None:
                     return current_square
-        if direction == 'S':
+        elif direction == 'S':
             for y in range(source[1] + 1, 8):
                 current_square = self.get_square((source[0], y))
                 if current_square.piece is not None:
                     return current_square
-        if direction == 'W':
+        elif direction == 'W':
             for x in range(source[0] - 1, -1, -1):
                 current_square = self.get_square((x, source[1]))
                 if current_square.piece is not None:
                     return current_square
-        if direction == 'E':
+        elif direction == 'E':
             for x in range(source[0] + 1, 8):
                 current_square = self.get_square((x, source[1]))
+                if current_square.piece is not None:
+                    return current_square
+        elif direction == 'SE':
+            for x in range(source[0] + 1, 8):
+                y = x - source[0]
+                current_square = self.get_square((x, y))
+                if current_square.piece is not None:
+                    return current_square
+        elif direction == 'SW':
+            for x in range(source[0] - 1, -1, -1):
+                y = source[0] - x
+                current_square = self.get_square((x, y))
                 if current_square.piece is not None:
                     return current_square
         return None

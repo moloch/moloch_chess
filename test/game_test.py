@@ -141,3 +141,24 @@ class TestGame(unittest.TestCase):
         self.assertEqual(True, game.moves[0].is_take)
         self.assertEqual(None, board.get_square(get_coords('d6')).piece)
         self.assertEqual('R', board.get_square(get_coords('c6')).piece.name)
+
+    def bishop_move_test(self):
+        #White bishop in d6
+        board = Board(init_matrix=[[0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 4]])
+        game = Game(board)
+        self.assertEqual('B', board.get_square(get_coords('h1')).piece.name)
+        self.assertEqual(None, board.get_square(get_coords('a8')).piece)
+        game.add_pgn_move('Ba8')
+        self.assertEqual((get_coords('h1'))[0], game.moves[0].source.x)
+        self.assertEqual((get_coords('h1'))[1], game.moves[0].source.y)
+        self.assertEqual((get_coords('a8'))[0], game.moves[0].destination.x)
+        self.assertEqual((get_coords('a8'))[1], game.moves[0].destination.y)
+        self.assertEqual(None, board.get_square(get_coords('h1')).piece)
+        self.assertEqual('B', board.get_square(get_coords('a8')).piece.name)

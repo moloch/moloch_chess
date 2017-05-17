@@ -108,3 +108,53 @@ class TestBoard(unittest.TestCase):
                                    [0, 0, 0, 0, 0, 0, 0, 0]])
         self.assertEqual(get_coords('f6')[0], board.find_first_piece(get_coords('b6'), 'E').x)
         self.assertEqual(get_coords('f6')[1], board.find_first_piece(get_coords('b6'), 'E').y)
+
+    def find_first_piece_south_east_test(self):
+        board = Board(init_matrix=[[4, 4, 4, 4, 4, 4, 4, 0],
+                                   [0, 1, 0, 0, 0, 0, 0, 1],
+                                   [0, 0, 0, 1, 0, 0, 0, 1],
+                                   [0, 0, 0, 0, 0, 1, 1, 1],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0]])
+        self.assertEqual(get_coords('b7')[0], board.find_first_piece(get_coords('a8'), 'SE').x)
+        self.assertEqual(get_coords('b7')[1], board.find_first_piece(get_coords('a8'), 'SE').y)
+        self.assertEqual(get_coords('d6')[0], board.find_first_piece(get_coords('b8'), 'SE').x)
+        self.assertEqual(get_coords('d6')[1], board.find_first_piece(get_coords('b8'), 'SE').y)
+        self.assertEqual(get_coords('f5')[0], board.find_first_piece(get_coords('c8'), 'SE').x)
+        self.assertEqual(get_coords('f5')[1], board.find_first_piece(get_coords('c8'), 'SE').y)
+        self.assertEqual(get_coords('g5')[0], board.find_first_piece(get_coords('d8'), 'SE').x)
+        self.assertEqual(get_coords('g5')[1], board.find_first_piece(get_coords('d8'), 'SE').y)
+        self.assertEqual(get_coords('h5')[0], board.find_first_piece(get_coords('e8'), 'SE').x)
+        self.assertEqual(get_coords('h5')[1], board.find_first_piece(get_coords('e8'), 'SE').y)
+        self.assertEqual(get_coords('h6')[0], board.find_first_piece(get_coords('f8'), 'SE').x)
+        self.assertEqual(get_coords('h6')[1], board.find_first_piece(get_coords('f8'), 'SE').y)
+        self.assertEqual(get_coords('h7')[0], board.find_first_piece(get_coords('g8'), 'SE').x)
+        self.assertEqual(get_coords('h7')[1], board.find_first_piece(get_coords('g8'), 'SE').y)
+
+    def find_first_piece_south_west_test(self):
+        board = Board(init_matrix=[[0, 4, 4, 4, 4, 4, 4, 4],
+                                   [1, 0, 0, 0, 0, 0, 1, 0],
+                                   [1, 0, 0, 0, 1, 0, 0, 0],
+                                   [1, 0, 1, 0, 0, 0, 0, 0],
+                                   [1, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0]])
+        self.assertEqual((1,0), get_coords('b8'))
+        self.assertEqual((0,1), get_coords('a7'))
+        self.assertEqual(get_coords('a7')[0], board.find_first_piece(get_coords('b8'), 'SW').x)
+        self.assertEqual(get_coords('a7')[1], board.find_first_piece(get_coords('b8'), 'SW').y)
+        self.assertEqual(get_coords('a6')[0], board.find_first_piece(get_coords('c8'), 'SW').x)
+        self.assertEqual(get_coords('a6')[1], board.find_first_piece(get_coords('c8'), 'SW').y)
+        self.assertEqual(get_coords('a5')[0], board.find_first_piece(get_coords('d8'), 'SW').x)
+        self.assertEqual(get_coords('a5')[1], board.find_first_piece(get_coords('d8'), 'SW').y)
+        self.assertEqual(get_coords('a4')[0], board.find_first_piece(get_coords('e8'), 'SW').x)
+        self.assertEqual(get_coords('a4')[1], board.find_first_piece(get_coords('e8'), 'SW').y)
+        self.assertEqual(get_coords('c5')[0], board.find_first_piece(get_coords('f8'), 'SW').x)
+        self.assertEqual(get_coords('c5')[1], board.find_first_piece(get_coords('f8'), 'SW').y)
+        self.assertEqual(get_coords('e6')[0], board.find_first_piece(get_coords('g8'), 'SW').x)
+        self.assertEqual(get_coords('e6')[1], board.find_first_piece(get_coords('g8'), 'SW').y)
+        self.assertEqual(get_coords('g7')[0], board.find_first_piece(get_coords('h8'), 'SW').x)
+        self.assertEqual(get_coords('g7')[1], board.find_first_piece(get_coords('h8'), 'SW').y)
