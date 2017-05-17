@@ -103,3 +103,41 @@ class TestGame(unittest.TestCase):
         self.assertEqual(0, len(game.moves))
         self.assertEqual('R', board.get_square(get_coords('d6')).piece.name)
         self.assertEqual(None, board.get_square(get_coords('h6')).piece)
+
+    def rook_takes_test(self):
+        #White rook in d6, black pawn in d3
+        board = Board(init_matrix=[[6, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 2, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, -1, 0, 0, 0, -6],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0]])
+        game = Game(board)
+        self.assertEqual('R', board.get_square(get_coords('d6')).piece.name)
+        self.assertEqual('p', board.get_square(get_coords('d3')).piece.name)
+        game.add_pgn_move('Rxd3')
+        self.assertEqual(1, len(game.moves))
+        self.assertEqual(True, game.moves[0].is_take)
+        self.assertEqual('R', board.get_square(get_coords('d3')).piece.name)
+        self.assertEqual(None, board.get_square(get_coords('d6')).piece)
+
+    def rook_takes_near_piece_test(self):
+        #White rook in d6, black pawn in c6
+        board = Board(init_matrix=[[6, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, -1, 2, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, -6],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0]])
+        game = Game(board)
+        self.assertEqual('R', board.get_square(get_coords('d6')).piece.name)
+        self.assertEqual('p', board.get_square(get_coords('c6')).piece.name)
+        game.add_pgn_move('Rxc6')
+        self.assertEqual(1, len(game.moves))
+        self.assertEqual(True, game.moves[0].is_take)
+        self.assertEqual(None, board.get_square(get_coords('d6')).piece)
+        self.assertEqual('R', board.get_square(get_coords('c6')).piece.name)
