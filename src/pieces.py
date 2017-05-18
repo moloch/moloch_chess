@@ -50,9 +50,9 @@ class Bishop(Piece):
     def find_src_position(self, board, dest_rook_position, color):
         dest_square = board.get_square(dest_rook_position)
         src_square = False
-        for direction in ['SE', 'SW']:
+        for direction in ['SE', 'SW', 'NE', 'NW']:
             src_square = board.find_first_piece((dest_square.x, dest_square.y), direction)
-            if src_square != None and src_square.piece.name == 'B':
+            if src_square is not None and src_square.piece.name == 'B':
                 return src_square
 
     def find_taking_position(self, board, dest, source, color):

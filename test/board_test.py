@@ -114,8 +114,8 @@ class TestBoard(unittest.TestCase):
                                    [0, 0, 0, 0, 0, 1, 1, 1],
                                    [4, 0, 0, 0, 0, 0, 0, 0],
                                    [0, 0, 0, 0, 0, 0, 0, 0],
-                                   [4, 0, 0, 0, 0, 0, 0, 0],
-                                   [0, 0, 0, 1, 0, 0, 0, 0]])
+                                   [4, 0, 0, 0, 4, 0, 0, 0],
+                                   [0, 0, 0, 1, 0, 1, 0, 0]])
         pairings = [('a8', 'b7'),
                     ('b8', 'd6'),
                     ('c8', 'f5'),
@@ -123,7 +123,8 @@ class TestBoard(unittest.TestCase):
                     ('e8','h5'),
                     ('f8','h6'),
                     ('g8', 'h7'),
-                    ('a4', 'd1')]
+                    ('a4', 'd1'),
+                    ('e2', 'f1')]
         self.check_all_pairings(board, pairings, 'SE')
         self.assertEqual(None, board.find_first_piece(get_coords('a2'), 'SE'))
 

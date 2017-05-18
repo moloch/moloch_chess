@@ -86,10 +86,7 @@ class SouthEast (ComplexDirection):
         return source[0] + 1, 8
 
     def get_y(self, source, x):
-        if source[0] > source[1]:
-            return x - source[0]
-        else:
-            return x + source[1]
+        return source[1] - source[0] + x
 
 
 class SouthWest(ComplexDirection):
