@@ -1,6 +1,6 @@
 from square import Square
 from pieces import PieceFactory
-
+from directions import DirectionFactory
 
 class Board:
 
@@ -34,58 +34,7 @@ class Board:
         move.destination.piece = PieceFactory.build_from_pgn(move.piece, move.color)
 
     def find_first_piece(self, source, direction):
-        if direction == 'N':
-            for y in range(source[1] - 1, -1, -1):
-                current_square = self.get_square((source[0], y))
-                if current_square.piece is not None:
-                    return current_square
-        elif direction == 'S':
-            for y in range(source[1] + 1, 8):
-                current_square = self.get_square((source[0], y))
-                if current_square.piece is not None:
-                    return current_square
-        elif direction == 'W':
-            for x in range(source[0] - 1, -1, -1):
-                current_square = self.get_square((x, source[1]))
-                if current_square.piece is not None:
-                    return current_square
-        elif direction == 'E':
-            for x in range(source[0] + 1, 8):
-                current_square = self.get_square((x, source[1]))
-                if current_square.piece is not None:
-                    return current_square
-        elif direction == 'SE':
-            for x in range(source[0] + 1, 8):
-                if source[0] > source[1]:
-                    y = x - source[0]
-                else:
-                    y = x + source[1]
-                if 0 <= y <= 7:
-                    current_square = self.get_square((x, y))
-                    if current_square.piece is not None:
-                        return current_square
-        elif direction == 'SW':
-            for x in range(source[0] - 1, -1, -1):
-                y = source[0] + source[1] - x
-                if 0 <= y <= 7:
-                    current_square = self.get_square((x, y))
-                    if current_square.piece is not None:
-                        return current_square
-        elif direction == 'NE':
-            for x in range(source[0] + 1, 8):
-                y = source[0] + source[1] - x
-                if 0 <= y <= 7:
-                    current_square = self.get_square((x, y))
-                    if current_square.piece is not None:
-                        return current_square
-        elif direction == 'NW':
-            for x in range(source[0] - 1, -1, -1):
-                y = source[1] - source[0] + x
-                if 0 <= y <= 7:
-                    current_square = self.get_square((x, y))
-                    if current_square.piece is not None:
-                        return current_square
-        return None
+        return DirectionFactory.build(direction).find_first_piece(self, source)
 
 
     def print_board(self):
