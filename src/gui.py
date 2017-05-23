@@ -8,8 +8,25 @@ from PyQt5.QtWidgets import (QApplication, QGraphicsView, QGraphicsScene, QGraph
 
 
 class BoardGraphicsItem(QGraphicsRectItem):
-    def __init__(self):
+    def __init__(self, scene):
         super(BoardGraphicsItem, self).__init__()
+        self.setAcceptDrops(True)
+        self.scene = scene
+
+    def dragEnterEvent(self, event):
+        print("Enter Drag")
+
+    def dragLeaveEvent(self, event):
+        print("Leave Drag")
+
+    def dropEvent(self, event):
+        queen_pixmap = QPixmap("img/w_Q.png")
+        queen_pixmap = queen_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
+        queen = PieceGraphicsPixmapItem(queen_pixmap)
+        x = event.scenePos().toPoint().x() - queen_pixmap.width() / 2
+        y = event.scenePos().toPoint().y() - queen_pixmap.height() / 2
+        queen.setOffset(x, y)
+        self.scene.addItem(queen)
 
 
 class PieceGraphicsPixmapItem(QGraphicsPixmapItem):
@@ -36,37 +53,22 @@ class PieceGraphicsPixmapItem(QGraphicsPixmapItem):
         drag.exec_()
 
 
-    def dragEnterEvent(self, event):
-        print("Enter Drag")
-
-    def dragLeaveEvent(self, event):
-        print("Leave Drag")
-
-    def dropEvent(self, event):
-        print("Drop")
-
-
 class MainWindow(QGraphicsView):
     def __init__(self):
         super(MainWindow, self).__init__()
         scene = QGraphicsScene(self)
-        scene.addItem(BoardGraphicsItem())
+        rectangle = BoardGraphicsItem(scene)
+        rectangle.setRect(QRectF(0, 0, 300, 300))
+        scene.addItem(rectangle)
         queen_pixmap = QPixmap("img/w_Q.png")
         queen_pixmap = queen_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
         queen = PieceGraphicsPixmapItem(queen_pixmap)
-        queen.setOffset(100,100)
+        queen.setOffset(100, 100)
         scene.addItem(queen)
-        #Usare QGraphicsPixmapItem per i vari pezzi, la scacchiera sara' lo sfondo QgraphicsView
         scene.setSceneRect(0, 0, 300, 300)
         self.setScene(scene)
         self.setCacheMode(QGraphicsView.CacheBackground)
         self.setWindowTitle("Moloch Chess")
-
-    def keyPressEvent(self, event):
-        key = event.key()
-        if key == Qt.Key_R:
-            self.tic_tac_toe.reset()
-        super(MainWindow, self).keyPressEvent(event)
 
 if __name__ == '__main__':
     import sys
