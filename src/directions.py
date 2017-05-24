@@ -105,7 +105,7 @@ class NorthEast(ComplexDirection):
         return source[0] + source[1] - x
 
 
-class NorthWest (Direction):
+class NorthWest (ComplexDirection):
     def get_range(self, source):
         return source[0] - 1, -1, -1
 
