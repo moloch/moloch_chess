@@ -12,4 +12,4 @@ class Move:
         self.is_checkmate = is_checkmate
 
     def __repr__(self):
-        return str(self.piece) + str(self.color) + str(self.source) + str(self.destination)
+        return str(self.piece) + " " + str(self.color)+ " " + str(self.source) + " " +str(self.destination)

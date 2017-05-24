@@ -23,6 +23,7 @@ class SquareGraphics(QGraphicsRectItem):
         game = self.board_graphics.game
         move = self.board_graphics.current_move
         move.destination = self.square.get_coords()
+        print("Drop event with move: " + str(move))
         if self.square.piece is not None:
             move.is_take = True
         if game.current_player.move(move) is not False:
@@ -86,12 +87,14 @@ class PieceGraphics(QGraphicsPixmapItem):
         if self.piece.color is not self.board_graphics.game.current_player.color:
             return
 
+
         self.board_graphics.moving_piece = self
         move = Move()
         move.piece = self.piece.name
         move.source = self.piece.square.get_coords()
         move.color = self.piece.color
         self.board_graphics.current_move = move
+        print("Mouse move event with move: " + str(move))
         item_data = QByteArray()
         buffer = QBuffer(item_data)
         buffer.open(QIODevice.WriteOnly)

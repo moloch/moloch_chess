@@ -104,7 +104,7 @@ class Pawn(Piece):
         if type(source_pawn_position) is int:
             src_square = board.get_square((source_pawn_position, dest_square.y + direction))
         else:
-            src_square = board.get_square(source_pawn_position)
+            src_square = board.get_square((source_pawn_position[0], dest_square.y + direction))
         if src_square.piece is not None and src_square.piece.name == 'p':
             return src_square
 
