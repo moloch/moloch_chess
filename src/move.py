@@ -10,3 +10,6 @@ class Move:
         self.is_kingside_castle = is_kingside_castle
         self.is_queenside_castle = is_queenside_castle
         self.is_checkmate = is_checkmate
+
+    def __repr__(self):
+        return str(self.piece) + str(self.color) + str(self.source) + str(self.destination)

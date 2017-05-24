@@ -32,6 +32,7 @@ class Board:
     def update(self, move):
         move.source.clear()
         move.destination.piece = PieceFactory.build_from_pgn(move.piece, move.color)
+        move.destination.piece.assign_to_square(move.destination)
 
     def find_first_piece(self, source, direction):
         return DirectionFactory.build(direction).find_first_piece(self, source)

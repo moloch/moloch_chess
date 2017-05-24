@@ -1,4 +1,7 @@
 class Piece:
+    def __init__(self):
+        self.square = None
+
     def perform_move(self, move, game):
         dest_square = game.board.get_square(move.destination)
         if move.is_take:
@@ -11,6 +14,9 @@ class Piece:
                 move.destination = dest_square
                 return move
         return False
+
+    def assign_to_square(self, square):
+        self.square = square
 
 
 class Rook(Piece):

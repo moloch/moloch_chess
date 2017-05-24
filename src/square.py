@@ -18,6 +18,7 @@ class Square:
         return not self.is_white()
 
     def put(self, piece):
+        piece.assign_to_square(self)
         self.piece = piece
 
     def clear(self):

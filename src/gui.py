@@ -20,6 +20,9 @@ class SquareGraphics(QGraphicsRectItem):
 
     def dropEvent(self, event):
         game = self.board_graphics.game
+        move = self.board_graphics.current_move
+        move.destination = self.square.get_coords()
+        game.current_player.move(move)
         piece_pixmap = QPixmap("img/" + self.board_graphics.moving_piece.piece.color +
                                "_" + self.board_graphics.moving_piece.piece.name + ".png")
         piece_pixmap = piece_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
@@ -38,6 +41,7 @@ class BoardGraphics(QGraphicsRectItem):
         self.game = game
         self.__generate_board()
         self.moving_piece = None
+        self.current_move = None
 
     def __generate_board(self):
         board = self.game.board
@@ -74,7 +78,13 @@ class PieceGraphics(QGraphicsPixmapItem):
 
     def mouseMoveEvent(self, event):
         self.board_graphics.moving_piece = self
-        print("Changing moving piece to:" + self.piece.name)
+        move = Move()
+        move.piece = self.piece.name
+        move.source = self.piece.square.get_coords()
+        move.color = self.piece.color
+        self.board_graphics.current_move = move
+        print("Changing moving piece to: " + self.piece.name)
+        print("Current move is: " + str(self.board_graphics.current_move))
         item_data = QByteArray()
         buffer = QBuffer(item_data)
         buffer.open(QIODevice.WriteOnly)
