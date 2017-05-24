@@ -30,5 +30,3 @@ class TestGame(unittest.TestCase):
         checker = LegalityChecker(Game(Board()))
         move = Move(piece='p', destination=get_coords('e5'))
         self.assertEqual(False, checker.check(move))
-        move = Move(piece='p', destination=get_coords('e2'))
-        self.assertEqual(False, checker.check(move))

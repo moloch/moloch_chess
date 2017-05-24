@@ -99,7 +99,7 @@ class Pawn(Piece):
         return self.__check_pawn_position(board, square, increments)
 
     def find_taking_position(self, board, dest_pawn_position, source_pawn_position, color):
-        direction = 1 if color=='W' else -1
+        direction = 1 if color == 'W' else -1
         dest_square = board.get_square(dest_pawn_position)
         if type(source_pawn_position) is int:
             src_square = board.get_square((source_pawn_position, dest_square.y + direction))
