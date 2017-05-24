@@ -17,21 +17,27 @@ class SquareGraphics(QGraphicsRectItem):
         self.board_graphics = board_graphics
         self.square = square
         self.setAcceptDrops(True)
+        self.piece_graphics = None
 
     def dropEvent(self, event):
         game = self.board_graphics.game
         move = self.board_graphics.current_move
         move.destination = self.square.get_coords()
-        game.current_player.move(move)
-        piece_pixmap = QPixmap("img/" + self.board_graphics.moving_piece.piece.color +
+        if self.square.piece is not None:
+            move.is_take = True
+        if game.current_player.move(move) is not False:
+            piece_pixmap = QPixmap("img/" + self.board_graphics.moving_piece.piece.color +
                                "_" + self.board_graphics.moving_piece.piece.name + ".png")
-        piece_pixmap = piece_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
-        piece_graphics = PieceGraphics(self.board_graphics, piece_pixmap, self.square.piece)
-        x = self.rect().x()
-        y = self.rect().y()
-        piece_graphics.setOffset(x, y)
-        self.board_graphics.scene.removeItem(self.board_graphics.moving_piece)
-        self.board_graphics.scene.addItem(piece_graphics)
+            piece_pixmap = piece_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
+            piece_graphics = PieceGraphics(self.board_graphics, piece_pixmap, self.square.piece)
+            x = self.rect().x()
+            y = self.rect().y()
+            piece_graphics.setOffset(x, y)
+            self.board_graphics.scene.removeItem(self.board_graphics.moving_piece)
+            if move.is_take and self.piece_graphics is not None:
+                self.board_graphics.scene.removeItem(self.piece_graphics)
+            self.piece_graphics = piece_graphics
+            self.board_graphics.scene.addItem(piece_graphics)
 
 
 class BoardGraphics(QGraphicsRectItem):
@@ -77,14 +83,15 @@ class PieceGraphics(QGraphicsPixmapItem):
         pass
 
     def mouseMoveEvent(self, event):
+        if self.piece.color is not self.board_graphics.game.current_player.color:
+            return
+
         self.board_graphics.moving_piece = self
         move = Move()
         move.piece = self.piece.name
         move.source = self.piece.square.get_coords()
         move.color = self.piece.color
         self.board_graphics.current_move = move
-        print("Changing moving piece to: " + self.piece.name)
-        print("Current move is: " + str(self.board_graphics.current_move))
         item_data = QByteArray()
         buffer = QBuffer(item_data)
         buffer.open(QIODevice.WriteOnly)

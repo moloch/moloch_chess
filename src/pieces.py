@@ -98,10 +98,13 @@ class Pawn(Piece):
             increments = [-1, -2]
         return self.__check_pawn_position(board, square, increments)
 
-    def find_taking_position(self, board, dest_pawn_position, source_pawn_column, color):
+    def find_taking_position(self, board, dest_pawn_position, source_pawn_position, color):
         direction = 1 if color=='W' else -1
         dest_square = board.get_square(dest_pawn_position)
-        src_square = board.get_square((source_pawn_column, dest_square.y + direction))
+        if type(source_pawn_position) is int:
+            src_square = board.get_square((source_pawn_position, dest_square.y + direction))
+        else:
+            src_square = board.get_square(source_pawn_position)
         if src_square.piece is not None and src_square.piece.name == 'p':
             return src_square
 

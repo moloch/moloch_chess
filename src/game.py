@@ -22,6 +22,8 @@ class Game:
             self.moves.append(move)
             self.board.update(move)
             self.__switch_current_player()
+        else:
+            return False
 
     def __switch_current_player(self):
         if self.current_player == self.white_player:
