@@ -28,7 +28,7 @@ class SquareGraphics(QGraphicsRectItem):
         if game.current_player.move(move) is not False:
             piece_pixmap = QPixmap("img/" + self.board_graphics.moving_piece.piece.color +
                                "_" + self.board_graphics.moving_piece.piece.name + ".png")
-            piece_pixmap = piece_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
+            piece_pixmap = piece_pixmap.scaledToHeight(70, Qt.SmoothTransformation)
             piece_graphics = PieceGraphics(self.board_graphics, piece_pixmap, self.square.piece)
             x = self.rect().x()
             y = self.rect().y()
