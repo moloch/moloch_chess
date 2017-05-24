@@ -11,15 +11,27 @@ from board import Board
 
 
 class SquareGraphics(QGraphicsRectItem):
-    def __init__(self):
+    def __init__(self, board_graphics, piece):
         super(SquareGraphics, self).__init__()
+        self.board_graphics = board_graphics
+        self.piece = piece
         self.setAcceptDrops(True)
+
+    def dropEvent(self, event):
+        piece_pixmap = QPixmap("img/" + self.board_graphics.moving_piece.piece.color +
+                               "_" + self.board_graphics.moving_piece.piece.name + ".png")
+        piece_pixmap = piece_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
+        queen = PieceGraphics(self.board_graphics, piece_pixmap, self.piece)
+        x = event.scenePos().toPoint().x() - piece_pixmap.width() / 2
+        y = event.scenePos().toPoint().y() - piece_pixmap.height() / 2
+        queen.setOffset(x, y)
+        self.board_graphics.scene.removeItem(self.board_graphics.moving_piece)
+        self.board_graphics.scene.addItem(queen)
 
 
 class BoardGraphics(QGraphicsRectItem):
     def __init__(self, scene, game):
         super(BoardGraphics, self).__init__()
-        self.setAcceptDrops(True)
         self.scene = scene
         self.game = game
         self.__generate_board()
@@ -28,7 +40,7 @@ class BoardGraphics(QGraphicsRectItem):
         board = self.game.board
         for line in board.squares:
             for square in line:
-                square_graphic_item = SquareGraphics()
+                square_graphic_item = SquareGraphics(self, square.piece)
                 x = square.x * 70
                 y = square.y * 70
                 square_graphic_item.setRect(QRectF(x, y, 70, 70))
@@ -41,36 +53,32 @@ class BoardGraphics(QGraphicsRectItem):
 
     def __add_piece(self, piece, x, y):
         if piece is not None:
-            queen_pixmap = QPixmap("img/" + piece.color + "_" + piece.name + ".png")
-            queen_pixmap = queen_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
-            queen = PieceGraphics(queen_pixmap)
-            queen.setOffset(x, y)
-            self.scene.addItem(queen)
+            piece_pixmap = QPixmap("img/" + piece.color + "_" + piece.name + ".png")
+            piece_pixmap = piece_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
+            piece_graphics = PieceGraphics(self, piece_pixmap, piece)
+            piece_graphics.setOffset(x, y)
+            self.scene.addItem(piece_graphics)
 
     def dragEnterEvent(self, event):
-        print("Enter Drag")
+        pass
 
     def dragLeaveEvent(self, event):
-        print("Leave Drag")
+        pass
 
-    def dropEvent(self, event):
-        queen_pixmap = QPixmap("img/w_Q.png")
-        queen_pixmap = queen_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
-        queen = PieceGraphics(queen_pixmap)
-        x = event.scenePos().toPoint().x() - queen_pixmap.width() / 2
-        y = event.scenePos().toPoint().y() - queen_pixmap.height() / 2
-        queen.setOffset(x, y)
-        self.scene.addItem(queen)
+
 
 
 class PieceGraphics(QGraphicsPixmapItem):
-    def __init__(self, pixmap):
+    def __init__(self, board_graphics, pixmap, piece):
         super().__init__(pixmap)
+        self.board_graphics = board_graphics
+        self.piece = piece
 
     def mousePressEvent(self, event):
         print("Press")
 
     def mouseMoveEvent(self, event):
+        self.board_graphics.moving_piece = self
         item_data = QByteArray()
         buffer = QBuffer(item_data)
         buffer.open(QIODevice.WriteOnly)
@@ -95,10 +103,6 @@ class MainWindow(QGraphicsView):
         rectangle = BoardGraphics(scene, game)
         rectangle.setRect(QRectF(0, 0, 560, 560))
         scene.addItem(rectangle)
-        #queen_pixmap = QPixmap("img/w_Q.png")
-        #queen_pixmap = queen_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
-        #queen = PieceGraphics(queen_pixmap)
-        #scene.addItem(queen)
         scene.setSceneRect(0, 0, 560, 560)
         self.setScene(scene)
         self.setCacheMode(QGraphicsView.CacheBackground)
