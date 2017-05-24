@@ -67,7 +67,7 @@ class BoardGraphics(QGraphicsRectItem):
     def __add_piece(self, piece, x, y):
         if piece is not None:
             piece_pixmap = QPixmap("img/" + piece.color + "_" + piece.name + ".png")
-            piece_pixmap = piece_pixmap.scaledToHeight(64, Qt.SmoothTransformation)
+            piece_pixmap = piece_pixmap.scaledToHeight(70, Qt.SmoothTransformation)
             piece_graphics = PieceGraphics(self, piece_pixmap, piece)
             piece_graphics.setOffset(x, y)
             self.scene.addItem(piece_graphics)
