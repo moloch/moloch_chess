@@ -77,9 +77,12 @@ class ComplexDirection(Direction):
         if coordinates is None:
             return None
         for coords in coordinates:
-            current_square = board.get_square(coords)
-            if current_square.piece is not None and current_square.piece.name is 'N':
-                return current_square
+            try:
+                current_square = board.get_square(coords)
+                if current_square.piece is not None and current_square.piece.name is 'N':
+                    return current_square
+            except IndexError:
+                return None
 
     @abstractmethod
     def find_knight_coords(self, board, source):
