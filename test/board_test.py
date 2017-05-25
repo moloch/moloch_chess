@@ -164,6 +164,7 @@ class TestBoard(unittest.TestCase):
                     ('f1', 'h3'),
                     ('g1', 'h2'),
                     ('a5', 'd8')]
+        self.check_all_pairings(board, pairings, 'NE')
         self.assertEqual(None, board.find_first_piece(get_coords('a4'), 'NE'))
 
     def find_first_piece_north_west_test(self):
@@ -184,10 +185,31 @@ class TestBoard(unittest.TestCase):
                     ('h1', 'a8'),
                     ('h5', 'e8'),
                     ('h6', 'f8')]
+        self.check_all_pairings(board, pairings, 'NW')
         self.assertEqual(None, board.find_first_piece(get_coords('a4'), 'NW'))
+
+    def find_first_knight_test(self):
+        board = Board(init_matrix=[[0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 3, 0, 3, 0, 0, 0],
+                                   [0, 3, 0, 0, 0, 3, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 3, 0, 0, 0, 3, 0, 0],
+                                   [0, 0, 3, 0, 3, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0],
+                                   [0, 0, 0, 0, 0, 0, 0, 0]])
+        pairings = [('d5', 'f4')]
+        self.check_all_knight_pairings(board, pairings, 'SE')
+
+
 
     def check_all_pairings(self, board, pairings, direction):
         for pair in pairings:
             expected = get_coords(pair[1])
             actual = board.find_first_piece(get_coords(pair[0]), direction).get_coords()
+            self.assertEqual(expected, actual)
+
+    def check_all_knight_pairings(self, board, pairings, direction):
+        for pair in pairings:
+            expected = get_coords(pair[1])
+            actual = board.find_first_knight(get_coords(pair[0]), direction).get_coords()
             self.assertEqual(expected, actual)

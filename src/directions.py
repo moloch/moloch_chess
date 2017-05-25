@@ -72,8 +72,17 @@ class ComplexDirection(Direction):
                     return current_square
         return None
 
-    @abstractmethod
     def find_first_knight(self, board, source):
+        coordinates = self.find_first_knight_coords(board, *source)
+        if coordinates is None:
+            return None
+        for coords in coordinates:
+            current_square = board.get_square(coords)
+            if current_square.piece is not None and current_square.piece.name is 'N':
+                return current_square
+
+    @abstractmethod
+    def find_knight_coords(self, board, source):
         pass
 
     @abstractmethod
@@ -92,8 +101,8 @@ class SouthEast (ComplexDirection):
     def get_y(self, source, x):
         return source[1] - source[0] + x
 
-    def find_first_knight(self, board, source):
-        print(source)
+    def find_first_knight_coords(self, board, x, y):
+        return [(x + 2, y + 1), (x + 1, y + 2)]
 
 
 class SouthWest(ComplexDirection):
@@ -103,8 +112,8 @@ class SouthWest(ComplexDirection):
     def get_y(self, source, x):
         return source[0] + source[1] - x
 
-    def find_first_knight(self, board, source):
-        print(source)
+    def find_first_knight_coords(self, board, x, y):
+        return [(x - 2, y + 1), (x - 1, y + 2)]
 
 
 class NorthEast(ComplexDirection):
@@ -114,8 +123,8 @@ class NorthEast(ComplexDirection):
     def get_y(self, source, x):
         return source[0] + source[1] - x
 
-    def find_first_knight(self, board, source):
-        print(source)
+    def find_first_knight_coords(self, board, x, y):
+        return [(x + 2, y - 1), (x + 1, y - 2)]
 
 
 class NorthWest (ComplexDirection):
@@ -125,8 +134,8 @@ class NorthWest (ComplexDirection):
     def get_y(self, source, x):
         return source[1] - source[0] + x
 
-    def find_first_knight(self, board, source):
-        print(source)
+    def find_first_knight_coords(self, board, x, y):
+        return [(x - 2, y - 1), (x - 1, y - 2)]
 
 
 class DirectionFactory:
