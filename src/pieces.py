@@ -44,6 +44,17 @@ class Knight(Piece):
         self.color = color
         self.name = 'N'
 
+    def find_src_position(self, board, dest_rook_position, color):
+        dest_square = board.get_square(dest_rook_position)
+        src_square = False
+        for direction in ['NW', 'NE', 'SW', 'SE']:
+            src_square = board.find_first_knight((dest_square.x, dest_square.y), direction)
+            if src_square != None and src_square.piece.name == 'N':
+                return src_square
+
+    def find_taking_position(self, board, dest, source, color):
+        return self.find_src_position(board, dest, color)
+
     def __str__(self):
         return self.name
 

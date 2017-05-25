@@ -37,6 +37,8 @@ class Board:
     def find_first_piece(self, source, direction):
         return DirectionFactory.build(direction).find_first_piece(self, source)
 
+    def find_first_knight(self, source, direction):
+        return DirectionFactory.build(direction).find_first_knight(self, source)
 
     def print_board(self):
         for line in self.squares:

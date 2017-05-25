@@ -73,6 +73,10 @@ class ComplexDirection(Direction):
         return None
 
     @abstractmethod
+    def find_first_knight(self, board, source):
+        pass
+
+    @abstractmethod
     def get_range(self, source):
         pass
 
@@ -88,6 +92,9 @@ class SouthEast (ComplexDirection):
     def get_y(self, source, x):
         return source[1] - source[0] + x
 
+    def find_first_knight(self, board, source):
+        print(source)
+
 
 class SouthWest(ComplexDirection):
     def get_range(self, source):
@@ -95,6 +102,9 @@ class SouthWest(ComplexDirection):
 
     def get_y(self, source, x):
         return source[0] + source[1] - x
+
+    def find_first_knight(self, board, source):
+        print(source)
 
 
 class NorthEast(ComplexDirection):
@@ -104,6 +114,9 @@ class NorthEast(ComplexDirection):
     def get_y(self, source, x):
         return source[0] + source[1] - x
 
+    def find_first_knight(self, board, source):
+        print(source)
+
 
 class NorthWest (ComplexDirection):
     def get_range(self, source):
@@ -111,6 +124,9 @@ class NorthWest (ComplexDirection):
 
     def get_y(self, source, x):
         return source[1] - source[0] + x
+
+    def find_first_knight(self, board, source):
+        print(source)
 
 
 class DirectionFactory:
